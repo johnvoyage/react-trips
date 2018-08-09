@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render new trip page correctly 1`] = `
+<div>
+  <h1>
+    New Trip
+  </h1>
+  <TripForm
+    onSubmit={[Function]}
+  />
+</div>
+`;

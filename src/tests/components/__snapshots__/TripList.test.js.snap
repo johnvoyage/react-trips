@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render TripList with no trips 1`] = `
+<div>
+  <p>
+    No trips
+  </p>
+</div>
+`;
+
+exports[`should render TripList with trips 1`] = `
+<div>
+  <TripListItem
+    country="Germany"
+  />
+  <TripListItem
+    country="USA"
+  />
+  <TripListItem
+    country="Uruguay"
+  />
+</div>
+`;

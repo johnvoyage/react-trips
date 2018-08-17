@@ -28,7 +28,6 @@ const state = store.getState();
 // console.log(state.filters)
 const visibleTrips = getVisibleTrips(state.trips, state.filters);
 console.log(visibleTrips)
-
 console.log(store.getState())
 
 const jsx = (

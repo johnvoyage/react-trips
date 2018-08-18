@@ -12,12 +12,18 @@ exports[`should render TripList with trips 1`] = `
 <div>
   <TripListItem
     country="Germany"
+    id="123abc"
+    key="123abc"
   />
   <TripListItem
     country="USA"
+    id="sfasg"
+    key="sfasg"
   />
   <TripListItem
     country="Uruguay"
+    id="gdsash"
+    key="gdsash"
   />
 </div>
 `;

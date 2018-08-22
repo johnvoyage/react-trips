@@ -34,3 +34,25 @@ export const editTrip = (id, updates) => ({
   id,
   updates
 });
+
+export const setTrips = (trips) => ({
+  type: 'SET_TRIPS',
+  trips
+});
+
+export const startSetTrips = () => {
+  return (dispatch) => {
+    return database.ref('trips').once('value').then((snapshot) => {
+      const trips = [];
+
+      snapshot.forEach((childSnapshot) => {
+        trips.push({
+          id: childSnapshot.key,
+          ...childSnapshot.val()
+        });
+      });
+
+      dispatch(setTrips(trips));
+    });
+  };
+};

@@ -7,26 +7,11 @@ import './styles/styles.scss';
 import 'react-dates/lib/css/_datepicker.css'
 
 import configureStore from './store/configureStore';
-import { addTrip } from './actions/trips';
+import { startSetTrips } from './actions/trips';
 import { setTextFilter } from './actions/filters';
 import { getVisibleTrips } from './selectors/trips';
 
 const store = configureStore();
-
-store.dispatch(addTrip({ country: 'USA' }))
-store.dispatch(addTrip({ country: 'Germany' }))
-// store.dispatch(setTextFilter('usa'))
-
-// setTimeout(() => {
-//   store.dispatch(setTextFilter('germ'));
-// }, 3000);
-
-const state = store.getState();
-// console.log(state.trips)
-// console.log(state.filters)
-const visibleTrips = getVisibleTrips(state.trips, state.filters);
-console.log(visibleTrips)
-console.log(store.getState())
 
 const jsx = (
   <Provider store={store}>
@@ -34,4 +19,8 @@ const jsx = (
   </Provider>
 )
 
-ReactDOM.render(jsx, document.getElementById('app'));
+ReactDOM.render(<h1>Loading...</h1>, document.getElementById('app'));
+
+store.dispatch(startSetTrips()).then(() => {
+  ReactDOM.render(jsx, document.getElementById('app'));
+});

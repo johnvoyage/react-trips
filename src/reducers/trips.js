@@ -16,10 +16,12 @@ const tripsReducer = (state = tripsReducerDefaultState, action) => {
             ...trip,
             ...action.updates
           };
-        } else {  
+        } else {
           return trip;
         };
       });
+    case 'SET_TRIPS':
+      return action.trips;
     default:
       return state;
   };

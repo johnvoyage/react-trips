@@ -1,11 +1,23 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import { startAddTrip ,addTrip, editTrip, removeTrip } from '../../actions/trips';
+import { startAddTrip ,addTrip, editTrip, removeTrip, setTrips, startSetTrips } from '../../actions/trips';
 import trips from '../fixtures/trips';
 import database from '../../firebase/firebase';
+import tripsReducer from '../../reducers/trips';
 
 const createMockStore = configureMockStore([thunk]);
+
+beforeEach((done) => {
+  const tripsData = {};
+  trips.forEach(({ id, country }) => {
+    tripsData[id] = { country }
+  });
+
+  database.ref('trips').set(tripsData).then(() => {
+    done();
+  });
+});
 
 test('should setup remove trip action object', () => {
   const id = '123abc'
@@ -69,6 +81,38 @@ test('should add trip with defaults to database and store', (done) => {
     return database.ref(`trips/${actions[0].trip.id}`).once('value');
   }).then((snapshot) => {
     expect(snapshot.val()).toEqual(tripDefaults);
+
+    done();
+  });
+});
+
+test('should setup set trip action object with data', () => {
+  const action = setTrips(trips);
+  expect(action).toEqual({
+    type: 'SET_TRIPS',
+    trips
+  });
+});
+
+// test('should set trips', () => {
+//   const action = {
+//     type: 'SET_TRIPS',
+//     trips: [trips[1]]
+//   };
+//   const state = tripsReducer(trips, action);
+//
+//   expect(state).toEqual([trips[1]]);
+// });
+
+test('should fetch the trips from firebase', (done) => {
+  const store = createMockStore();
+  store.dispatch(startSetTrips()).then(() => {
+    const actions = store.getActions();
+
+    expect(actions[0]).toEqual({
+      type: 'SET_TRIPS',
+      trips
+    })
 
     done();
   });

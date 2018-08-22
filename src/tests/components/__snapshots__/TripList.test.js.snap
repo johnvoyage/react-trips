@@ -22,8 +22,8 @@ exports[`should render TripList with trips 1`] = `
   />
   <TripListItem
     country="Uruguay"
-    id="gdsash"
-    key="gdsash"
+    id="zgdsash"
+    key="zgdsash"
   />
 </div>
 `;

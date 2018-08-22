@@ -5,13 +5,13 @@ import { NewTripPage } from '../../components/NewTripPage';
 import trips from '../fixtures/trips';
 
 
-let addTripSpy, historySpy, wrapper;
+let startAddTrip, historySpy, wrapper;
 
 beforeEach(() => {
-  addTripSpy = jest.fn();
+  startAddTrip = jest.fn();
   historySpy = { push: jest.fn() };
-  wrapper = shallow(<NewTripPage  
-    addTrip={addTripSpy}
+  wrapper = shallow(<NewTripPage
+    startAddTrip={startAddTrip}
     history={historySpy}
   />);
 });
@@ -24,5 +24,5 @@ test('should handle onSubmit', () => {
   wrapper.find('TripForm').prop('onSubmit')(trips[1]);
 
   expect(historySpy.push).toHaveBeenLastCalledWith('/trips');
-  expect(addTripSpy).toHaveBeenLastCalledWith(trips[1]);
+  expect(startAddTrip).toHaveBeenLastCalledWith(trips[1]);
 });

@@ -2,20 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import TripForm from './TripForm';
-import { addTrip } from '../actions/trips';
+import { startAddTrip } from '../actions/trips';
 
 export class NewTripPage extends React.Component {
   onSubmit = (trip) => {
     // props.dispatch(addTrip(trip));
-    this.props.addTrip(trip)
+    this.props.startAddTrip(trip)
     this.props.history.push('/trips');
   };
 
   render() {
     return (
-      <div> 
+      <div>
         <h1>New Trip</h1>
-        <TripForm 
+        <TripForm
           onSubmit={this.onSubmit}
         />
       </div>
@@ -24,7 +24,7 @@ export class NewTripPage extends React.Component {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    addTrip: (trip) => dispatch(addTrip(trip))
+    startAddTrip: (trip) => dispatch(startAddTrip(trip))
 });
 
 export default connect(undefined, mapDispatchToProps)(NewTripPage);

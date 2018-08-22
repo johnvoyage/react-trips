@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render TripListItem correctly 1`] = `
+<div>
+  <Link
+    replace={false}
+    to="/edit/123abc"
+  >
+    <h3>
+      Germany
+    </h3>
+  </Link>
+</div>
+`;

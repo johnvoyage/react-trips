@@ -1,15 +1,29 @@
 import uuid from 'uuid';
+import database from '../firebase/firebase';
 
-export const addTrip = (
-  {
-    country = ''
-  } = {}
-) => ({
+export const startAddTrip = (tripData = {}) => {
+  return (dispatch) => {
+
+    const {
+      country = ''
+    } = tripData;
+
+    const trip = {
+      country
+    }
+
+    database.ref('trips').push(trip).then((ref) => {
+      dispatch(addTrip({
+        id: ref.key,
+        ...trip
+      }));
+    });
+  };
+};
+
+export const addTrip = (trip) => ({
   type: 'ADD_TRIP',
-  trip: {
-    id: uuid(),
-    country,
-  }
+  trip
 });
 
 export const removeTrip = ({ id } = {}) => ({

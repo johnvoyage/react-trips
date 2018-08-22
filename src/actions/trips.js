@@ -3,16 +3,14 @@ import database from '../firebase/firebase';
 
 export const startAddTrip = (tripData = {}) => {
   return (dispatch) => {
-
     const {
       country = ''
     } = tripData;
-
     const trip = {
       country
-    }
+    };
 
-    database.ref('trips').push(trip).then((ref) => {
+    return database.ref('trips').push(trip).then((ref) => {
       dispatch(addTrip({
         id: ref.key,
         ...trip

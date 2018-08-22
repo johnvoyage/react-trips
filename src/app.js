@@ -6,10 +6,7 @@ import 'normalize.css/normalize.css'
 import './styles/styles.scss';
 import 'react-dates/lib/css/_datepicker.css'
 
-import './firebase/firebase'
-
 import configureStore from './store/configureStore';
-
 import { addTrip } from './actions/trips';
 import { setTextFilter } from './actions/filters';
 import { getVisibleTrips } from './selectors/trips';

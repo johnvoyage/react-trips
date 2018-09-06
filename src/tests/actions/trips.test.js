@@ -4,6 +4,7 @@ import thunk from 'redux-thunk';
 import {
   startAddTrip ,
   addTrip,
+  startEditTrip,
   editTrip,
   startRemoveTrip,
   removeTrip,
@@ -37,7 +38,7 @@ test('should setup remove trip action object', () => {
   });
 });
 
-test('should remove expense from firebase', (done) => {
+test('should remove trip from firebase', (done) => {
   const store = createMockStore({});
   const id = trips[2].id;
   store.dispatch(startRemoveTrip({ id })).then(() => {

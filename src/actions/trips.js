@@ -43,6 +43,14 @@ export const editTrip = (id, updates) => ({
   updates
 });
 
+export const startEditTrip = (id, updates) => {
+  return (dispatch) => {
+    return database.ref(`trips/${id}`).update(updates).then(() => {
+      dispatch(editExpense(id, updates));
+    })
+  }
+}
+
 export const setTrips = (trips) => ({
   type: 'SET_TRIPS',
   trips

@@ -29,6 +29,14 @@ export const removeTrip = ({ id } = {}) => ({
   id
 });
 
+export const startRemoveTrip = ({ id } = {}) => {
+  return (dispatch) => {
+    return database.ref(`trips/${id}`).remove().then(() => {
+      dispatch(removeTrip({ id }));
+    });
+  };
+};
+
 export const editTrip = (id, updates) => ({
   type: 'EDIT_TRIP',
   id,

@@ -1,7 +1,15 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import { startAddTrip ,addTrip, editTrip, removeTrip, setTrips, startSetTrips } from '../../actions/trips';
+import {
+  startAddTrip ,
+  addTrip,
+  editTrip,
+  startRemoveTrip,
+  removeTrip,
+  setTrips,
+  startSetTrips
+} from '../../actions/trips';
 import trips from '../fixtures/trips';
 import database from '../../firebase/firebase';
 import tripsReducer from '../../reducers/trips';
@@ -26,6 +34,22 @@ test('should setup remove trip action object', () => {
   expect(action).toEqual({
     type: 'REMOVE_TRIP',
     id
+  });
+});
+
+test('should remove expense from firebase', (done) => {
+  const store = createMockStore({});
+  const id = trips[2].id;
+  store.dispatch(startRemoveTrip({ id })).then(() => {
+    const actions = store.getActions();
+    expect(actions[0]).toEqual({
+      type: 'REMOVE_TRIP',
+      id,
+    });
+    return database.ref(`trips/${id}`).once('value');
+  }).then((snapshot) => {
+    expect(snapshot.val()).toBeFalsy();
+    done();
   });
 });
 

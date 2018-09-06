@@ -2,19 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import TripForm from './TripForm';
-import { editTrip, removeTrip } from '../actions/trips';
+import { editTrip, startRemoveTrip } from '../actions/trips';
 
 const EditTripPage = (props) => (
   <div>
     <TripForm
-      trip={props.trip} 
+      trip={props.trip}
       onSubmit={(trip) => {
         props.dispatch(editTrip(props.trip.id, trip));
         props.history.push('/trips');
       }}
     />
     <button onClick={() => {
-      props.dispatch(removeTrip({ id: props.trip.id }));
+      props.dispatch(startRemoveTrip({ id: props.trip.id }));
       props.history.push('/trips');
     }}>Remove</button>
   </div>
